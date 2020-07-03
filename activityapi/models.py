@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 from timezone_field import TimeZoneField
 
 
-# Create your models here.
-class member(models.Model):
+class Member(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -17,4 +16,15 @@ class member(models.Model):
     class Meta:
         verbose_name = 'Member'
         verbose_name_plural = 'Members'
+
+
+class ActivityPeriod(models.Model):
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
+    def __str__(self):
+        return self.member.user.username + " " + str(self.id)
+
+
 
