@@ -1,6 +1,7 @@
+from timezone_field import TimeZoneField
+
 from django.db import models
 from django.contrib.auth.models import User
-from timezone_field import TimeZoneField
 
 
 class Member(models.Model):
@@ -19,7 +20,7 @@ class Member(models.Model):
 
 
 class ActivityPeriod(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    member = models.ForeignKey(Member, related_name='activity', on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
